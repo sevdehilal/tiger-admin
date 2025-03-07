@@ -1,39 +1,90 @@
-import React from 'react';
-import { Layout, Menu } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { Layout, Menu, Drawer, Button } from 'antd';
 import { Link } from 'react-router-dom';
-import logo from "../img/logo.png"; // Logo görselini import ediyoruz
-import { HomeOutlined, ContactsOutlined, InfoCircleOutlined } from '@ant-design/icons';
+import { MenuOutlined, HomeOutlined, ContactsOutlined, InfoCircleOutlined } from '@ant-design/icons';
+import logo from "../img/logo.png";
 
 const { Header } = Layout;
 
 const HeaderComponent = () => {
+  const [visible, setVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
-    <Header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '150px', padding: '0 100px', backgroundColor: '#2A2A2C' }}>
+    <Header
+      style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        height: isMobile ? '60px' : '100px', // Header boyutunu mobilde küçültüyoruz
+        padding: isMobile ? '0 20px': '0 70px' ,
+        backgroundColor: '#2A2A2C',
+      }}
+    >
       {/* Logo ve başlık kısmı */}
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <img 
-          src={logo}
+          src={logo} 
           alt="Logo" 
-          style={{ width: '240px', height: '150px', marginRight: '20px' }} // Logonun boyutunu 150px olarak ayarladık
+          style={{ 
+            maxWidth: '100%', // Logonun orantılı olarak küçülmesini sağlar
+            height: 'auto', // Yükseklik oranını korur
+            width: isMobile ? '60px' : '100px', // Mobilde biraz küçültüyoruz, masaüstünde 160px
+            marginRight: '10px' 
+          }} 
         />
-        <div style={{ color: 'white', fontSize: '32px' }}> {/* Başlık yazısının font boyutunu büyüttük */}
-          <strong>Tiger Araç Kiralama</strong>
-        </div>
+        {!isMobile && (
+          <div style={{ color: 'white', fontSize: '24px' }}>
+            <strong>Tiger Araç Kiralama</strong>
+          </div>
+        )}
       </div>
-      
-      {/* Menüler */}
-      <Menu theme="dark" mode="horizontal" style={{ lineHeight: '64px', fontSize: '18px'  , display: 'flex' , backgroundColor: '#2A2A2C'
-}}> {/* Menü elemanlarının font boyutunu büyüttük */}
-        <Menu.Item key="home" icon={<HomeOutlined />}>
-          <Link to="/">Ana Sayfa</Link>
-        </Menu.Item>
-        <Menu.Item key="about" icon={<InfoCircleOutlined />}>
-          <Link to="/about">Hakkımızda</Link>
-        </Menu.Item>
-        <Menu.Item key="contact" icon={<ContactsOutlined />}>
-          <Link to="/contact">İletişim</Link>
-        </Menu.Item>
-      </Menu>
+
+      {/* Mobil Menü Butonu */}
+      {isMobile ? (
+        <Button type="text" icon={<MenuOutlined />} onClick={() => setVisible(true)} style={{ color: 'white', fontSize: '24px' }} />
+      ) : (
+        <Menu theme="dark" mode="horizontal" style={{ backgroundColor: '#2A2A2C', fontSize: '18px' }}>
+          <Menu.Item key="home" icon={<HomeOutlined />}>
+            <Link to="/">Ana Sayfa</Link>
+          </Menu.Item>
+          <Menu.Item key="about" icon={<InfoCircleOutlined />}>
+            <Link to="/about">Hakkımızda</Link>
+          </Menu.Item>
+          <Menu.Item key="contact" icon={<ContactsOutlined />}>
+            <Link to="/contact">İletişim</Link>
+          </Menu.Item>
+        </Menu>
+      )}
+
+      {/* Mobil Menü Drawer */}
+      <Drawer
+        title="Menü"
+        placement="right"
+        onClose={() => setVisible(false)}
+        visible={visible}
+        bodyStyle={{ padding: 0 }}
+      >
+        <Menu mode="vertical" theme="light" style={{ fontSize: '18px' }}>
+          <Menu.Item key="home" icon={<HomeOutlined />} onClick={() => setVisible(false)}>
+            <Link to="/">Ana Sayfa</Link>
+          </Menu.Item>
+          <Menu.Item key="about" icon={<InfoCircleOutlined />} onClick={() => setVisible(false)}>
+            <Link to="/about">Hakkımızda</Link>
+          </Menu.Item>
+          <Menu.Item key="contact" icon={<ContactsOutlined />} onClick={() => setVisible(false)}>
+            <Link to="/contact">İletişim</Link>
+          </Menu.Item>
+        </Menu>
+      </Drawer>
     </Header>
   );
 };

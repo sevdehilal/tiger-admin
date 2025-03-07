@@ -78,67 +78,68 @@ const CarGallery = () => {
 
       {/* Slider Alanı */}
       <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "column",
+        marginBottom: "20px",
+        position: "relative",
+        width: "100%",
+      }}
+    >
+      {/* Sol Ok Butonu */}
+      <LeftOutlined
+        onClick={handlePrev}
         style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          flexDirection: "column",
-          marginBottom: "20px",
-          position: "relative",
-          width: "100%",
+          position: "absolute",
+          left: "10%",
+          top: "50%",
+          transform: "translateY(-50%)",
+          fontSize: "30px",
+          color: "white",
+          backgroundColor: "rgba(0,0,0,0.5)",
+          padding: "10px",
+          borderRadius: "50%",
+          cursor: "pointer",
         }}
-      >
-        {/* Sol Ok Butonu */}
-        <LeftOutlined
-          onClick={handlePrev}
+      />
+
+      {/* Resim */}
+      {cars.length > 0 && (
+        <img
+          alt={cars[currentIndex].model}
+          src={cars[currentIndex].imageUrl}
           style={{
-            position: "absolute",
-            left: "10%",
-            top: "50%",
-            transform: "translateY(-50%)",
-            fontSize: "30px",
-            color: "white",
-            backgroundColor: "rgba(0,0,0,0.5)",
-            padding: "10px",
-            borderRadius: "50%",
-            cursor: "pointer",
+            height: "400px", // Adjust this based on the desired image height
+            width: "100%", // Ensure the image spans the width of the container
+            objectFit: "contain", // Ensure the image fits within the container
+            borderRadius: "10px",
+            transition: "opacity 1s ease-in-out",
+            opacity: 0.9,
           }}
         />
+      )}
 
-        {/* Resim */}
-        {cars.length > 0 && (
-          <img
-            alt={cars[currentIndex].model}
-            src={cars[currentIndex].imageUrl}
-            style={{
-              height: "400px",
-              width: "auto",
-              maxWidth: "90%",
-              objectFit: "cover",
-              borderRadius: "10px",
-              transition: "opacity 1s ease-in-out",
-              opacity: 0.9,
-            }}
-          />
-        )}
+      {/* Sağ Ok Butonu */}
+      <RightOutlined
+        onClick={handleNext}
+        style={{
+          position: "absolute",
+          right: "10%",
+          top: "50%",
+          transform: "translateY(-50%)",
+          fontSize: "30px",
+          color: "white",
+          backgroundColor: "rgba(0,0,0,0.5)",
+          padding: "10px",
+          borderRadius: "50%",
+          cursor: "pointer",
+        }}
+      />
+    </div>
 
-        {/* Sağ Ok Butonu */}
-        <RightOutlined
-          onClick={handleNext}
-          style={{
-            position: "absolute",
-            right: "10%",
-            top: "50%",
-            transform: "translateY(-50%)",
-            fontSize: "30px",
-            color: "white",
-            backgroundColor: "rgba(0,0,0,0.5)",
-            padding: "10px",
-            borderRadius: "50%",
-            cursor: "pointer",
-          }}
-        />
-      </div>
+
 
       {/* Slider Altındaki Çizgi ve Başlık */}
       <div
@@ -177,24 +178,25 @@ const CarGallery = () => {
                   }
                 >
                   <Meta
-                    title={car.model}
+                    title={car.model} 
                     description={
                       <div>
                         <p>
-                          <CarOutlined /> <strong>Fuel:</strong> {car.fuel}
+                          <CarOutlined style={{ color: '#FFA500' }} /> <strong>Fuel:</strong> {car.fuel}
                         </p>
                         <p>
-                          <ToolOutlined /> <strong>Transmission:</strong> {car.transmission}
+                          <ToolOutlined style={{ color: '#FFA500' }} /> <strong>Transmission:</strong> {car.transmission}
                         </p>
                         <p>
-                          <CalendarOutlined /> <strong>Year:</strong> {car.year}
+                          <CalendarOutlined style={{ color: '#FFA500' }} /> <strong>Year:</strong> {car.year}
                         </p>
                         <p>
-                          <CalendarOutlined /> <strong>Adet:</strong> {car.quantity}
+                          <CalendarOutlined style={{ color: '#FFA500' }} /> <strong>Adet:</strong> {car.quantity}
                         </p>
                       </div>
                     }
                   />
+
 
                   {/* WhatsApp ve Telefon Butonları */}
                   <div style={{ marginTop: "10px" }}>
