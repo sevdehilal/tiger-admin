@@ -133,7 +133,7 @@ const CarGallery = () => {
             fontSize: "30px",
             color: "white",
             backgroundColor: "rgba(0,0,0,0.5)",
-            padding: "11px",
+            padding: "10px",
             borderRadius: "50%",
             cursor: "pointer",
           }}
