@@ -193,7 +193,8 @@ const CarGallery = () => {
                       style={{
                         position: "relative",
                         overflow: "hidden", // Taşmaların engellenmesi için
-                        height: isMobile ? "200px" : "70px", // Mobilde boyutu küçült
+                        height: isMobile ? "200px" : "150px",
+                        width: "100%",// Mobilde boyutu küçült
                       }}
                     >
                       <img

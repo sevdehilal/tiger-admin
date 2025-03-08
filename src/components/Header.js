@@ -25,32 +25,42 @@ const HeaderComponent = () => {
         justifyContent: 'space-between',
         alignItems: 'center',
         height: isMobile ? '80px' : '100px', // Header boyutunu mobilde küçültüyoruz
-        padding: isMobile ? '0 20px': '0 70px' ,
+        padding: isMobile ? '0 20px' : '0 70px',
         backgroundColor: '#2A2A2C',
       }}
     >
       {/* Logo ve başlık kısmı */}
       <div style={{ display: 'flex', alignItems: 'center' }}>
-        <img 
-          src={logo} 
-          alt="Logo" 
-          style={{ 
+        <img
+          src={logo}
+          alt="Logo"
+          style={{
             maxWidth: '100%', // Logonun orantılı olarak küçülmesini sağlar
             height: 'auto', // Yükseklik oranını korur
             width: isMobile ? '80px' : '100px', // Mobilde biraz küçültüyoruz, masaüstünde 160px
-            marginRight: '10px' 
-          }} 
+            marginRight: '10px',
+          }}
         />
-        {!isMobile && (
-          <div style={{ color: 'white', fontSize: '24px' }}>
-            <strong>Tiger Araç Kiralama</strong>
-          </div>
-        )}
+        {/* Başlık, mobilde de gösterilecek şekilde düzenlendi */}
+        <div
+          style={{
+            color: 'white',
+            fontSize: isMobile ? '19px' : '24px', // Mobilde daha küçük font
+            fontWeight: 'bold',
+          }}
+        >
+          Tiger Araç Kiralama
+        </div>
       </div>
 
       {/* Mobil Menü Butonu */}
       {isMobile ? (
-        <Button type="text" icon={<MenuOutlined />} onClick={() => setVisible(true)} style={{ color: 'white', fontSize: '24px' }} />
+        <Button
+          type="text"
+          icon={<MenuOutlined />}
+          onClick={() => setVisible(true)}
+          style={{ color: 'white', fontSize: '24px' }}
+        />
       ) : (
         <Menu theme="dark" mode="horizontal" style={{ backgroundColor: '#2A2A2C', fontSize: '18px' }}>
           <Menu.Item key="home" icon={<HomeOutlined />}>
