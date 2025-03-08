@@ -183,19 +183,26 @@ const CarGallery = () => {
               <Col xs={24} sm={12} md={8} lg={8} key={car.id}>
                 <Card
                   hoverable
-                  style={{ width: "100%", textAlign: "center", position: "relative" }}
+                  style={{
+                    width: "100%",
+                    textAlign: "center",
+                    position: "relative",
+                  }}
                   cover={
-                    <div style={{ position: "relative", padding: isMobile ? "0 20px" : "0" }}>
+                    <div
+                      style={{
+                        position: "relative",
+                        overflow: "hidden", // Taşmaların engellenmesi için
+                        height: isMobile ? "200px" : "150px", // Mobilde boyutu küçült
+                      }}
+                    >
                       <img
                         alt={car.model}
                         src={car.imageUrl}
                         style={{
-                          height: "180px",
-                          weight: "%100",
-                          objectFit: "contain", // Bu şekilde resmin boyutunu kartın boyutlarına uyarlıyoruz.
-                          borderTopLeftRadius: "8px",
-                          borderTopRightRadius: "8px",
-                          width: "100%",
+                          width: "100%", // Resmi kartın genişliğine göre ayarla
+                          height: "100%", // Yüksekliği de 100% yaparak resmin kartın yüksekliğine uyum sağlamasını sağla
+                          objectFit: "cover", // Resmin taşmasını engellemek ve kesilmesini sağlamak için
                         }}
                       />
                     </div>
