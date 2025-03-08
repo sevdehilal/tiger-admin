@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { db, collection, getDocs } from "./firebase";
 import { Row, Col, Card, Skeleton, Typography, Button } from "antd";
+import FooterComponent from "./components/FooterComponent";
 import {
   PhoneOutlined,
   WhatsAppOutlined,
@@ -17,7 +18,7 @@ import { Helmet } from "react-helmet-async";
   <title>Kırklareli Araç Kiralama - En Uygun Fiyatlarla Araba Kirala</title>
   <meta name="description" content="Kırklareli araç kiralama hizmetleri ile uygun fiyatlı ve konforlu arabalar kiralayın. Geniş araç filomuzla 7/24 hizmetinizdeyiz." />
   <meta name="keywords" content="Kırklareli araç kiralama, Kırklareli araba kiralama, Uygun fiyatlı araç kiralama, Günlük araç kiralama, Kırklareli oto kiralama" />
-  <meta name="author" content="Senin Firman" />
+  <meta name="author" content="Tiger Oto,Tiger Rent A Car" />
   <meta property="og:title" content="Kırklareli Araç Kiralama - En Uygun Fiyatlarla Araba Kirala" />
   <meta property="og:description" content="Kırklareli'de araba kiralama mı arıyorsunuz? Ekonomik ve lüks araç seçenekleriyle en iyi fiyat garantisi sunuyoruz!" />
   <meta property="og:image" content="URL_TO_YOUR_COVER_IMAGE" />
@@ -76,18 +77,22 @@ const CarGallery = () => {
     <div style={{ padding: "0px" }}>
       <Header />
 
-      {/* Slider Alanı */}
       <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        flexDirection: "column",
-        marginBottom: "20px",
-        position: "relative",
-        width: "100%",
-      }}
-    >
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "column",
+          marginBottom: "20px",
+          position: "relative",
+          width: "100%",
+          height: "450px", // Arka planın görünmesi için yüksekliği artır
+          backgroundImage: `url("")`, // Buraya arka plan resmi URL'sini ekleyin
+          backgroundSize: "cover", // Resmin tamamı görünsün
+          backgroundPosition: "center", // Resmi ortala
+          backgroundRepeat: "no-repeat",
+        }}
+      >
       {/* Sol Ok Butonu */}
       <LeftOutlined
         onClick={handlePrev}
@@ -146,7 +151,7 @@ const CarGallery = () => {
         style={{
           width: "100%",
           height: "2px",
-          backgroundColor: "#ccc",
+          backgroundColor: "#d3d3d3",
           marginBottom: "20px",
         }}
       ></div>
@@ -161,10 +166,11 @@ const CarGallery = () => {
           <Row gutter={[24, 24]} justify="center">
             {cars.map((car) => (
               <Col xs={24} sm={12} md={8} lg={8} key={car.id}>
-                <Card
-                  hoverable
-                  style={{ width: "100%", textAlign: "center" }}
-                  cover={
+              <Card
+                hoverable
+                style={{ width: "100%", textAlign: "center", position: "relative" }}
+                cover={
+                  <div style={{ position: "relative" }}>
                     <img
                       alt={car.model}
                       src={car.imageUrl}
@@ -173,26 +179,48 @@ const CarGallery = () => {
                         objectFit: "cover",
                         borderTopLeftRadius: "8px",
                         borderTopRightRadius: "8px",
+                        width: "100%",
                       }}
                     />
+                    {/* Araç Sayısı Etiketi */}
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: "10px",
+                        right: "10px",
+                        backgroundColor: "#FFA500",
+                        color: "white",
+                        padding: "5px 10px",
+                        borderRadius: "20px",
+                        fontWeight: "bold",
+                        fontSize: "14px",
+                        boxShadow: "0px 2px 5px rgba(0,0,0,0.3)",
+                      }}
+                    >
+                      {car.quantity} Adet
+                    </div>
+                  </div>
+                }
+              >
+            
+            <Meta
+                  title={
+                    <Typography.Title level={3} style={{ marginBottom: "8px" }}>
+                      {car.model}
+                    </Typography.Title>
                   }
-                >
-                  <Meta
-                    title={car.model} 
                     description={
                       <div>
                         <p>
-                          <CarOutlined style={{ color: '#FFA500' }} /> <strong>Fuel:</strong> {car.fuel}
+                          <CarOutlined style={{ color: '#FFA500' }} /> <strong></strong> {car.fuel}
                         </p>
                         <p>
-                          <ToolOutlined style={{ color: '#FFA500' }} /> <strong>Transmission:</strong> {car.transmission}
+                          <ToolOutlined style={{ color: '#FFA500' }} /> <strong></strong> {car.transmission}
                         </p>
                         <p>
-                          <CalendarOutlined style={{ color: '#FFA500' }} /> <strong>Year:</strong> {car.year}
+                          <CalendarOutlined style={{ color: '#FFA500' }} /> <strong></strong> {car.year}
                         </p>
-                        <p>
-                          <CalendarOutlined style={{ color: '#FFA500' }} /> <strong>Adet:</strong> {car.quantity}
-                        </p>
+                        
                       </div>
                     }
                   />
@@ -223,8 +251,10 @@ const CarGallery = () => {
               </Col>
             ))}
           </Row>
+          
         </div>
       </div>
+      <FooterComponent></FooterComponent>
     </div>
   );
 };

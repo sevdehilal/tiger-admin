@@ -2,20 +2,27 @@ import React from "react";
 import { PhoneOutlined, WhatsAppOutlined } from "@ant-design/icons";
 import { Button } from "antd";
 import Header from "./components/Header";
+import FooterComponent from "./components/FooterComponent";
 
 const Contact = () => {
   const phoneNumber = "05522523997";
 
   return (
-    
-    <div style={{ textAlign: "center", marginTop: "0px" }}>
-        <Header />
-      
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        minHeight: "100vh", // Sayfanın en az ekran boyutunda olması için
+      }}
+    >
+      <Header />
 
-      <div style={{ marginTop: "200px" }}>
-        {/* Telefon ile arama butonu */}
+      {/* İçerik Alanı */}
+      <div style={{ flex: 1, textAlign: "center", marginTop: "200px" }}>
         <h2>İletişim Sayfası</h2>
-      <p>Bizimle aşağıdaki seçeneklerden iletişime geçebilirsiniz.</p>
+        <p>Bizimle aşağıdaki seçeneklerden iletişime geçebilirsiniz.</p>
+
+        {/* Telefon ile arama butonu */}
         <Button
           type="primary"
           icon={<PhoneOutlined />}
@@ -38,6 +45,9 @@ const Contact = () => {
           WhatsApp'tan Mesaj Gönder
         </Button>
       </div>
+
+      {/* Footer En Alta Sabitlendi */}
+      <FooterComponent />
     </div>
   );
 };
