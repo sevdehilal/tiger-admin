@@ -1,6 +1,6 @@
 import React from "react";
 import { PhoneOutlined, WhatsAppOutlined } from "@ant-design/icons";
-import { Button } from "antd";
+import { Button, Typography, Space } from "antd";
 import Header from "./components/Header";
 import FooterComponent from "./components/FooterComponent";
 
@@ -13,40 +13,67 @@ const Contact = () => {
         display: "flex",
         flexDirection: "column",
         minHeight: "100vh", // Sayfanın en az ekran boyutunda olması için
+        padding: "0px",
       }}
     >
       <Header />
 
       {/* İçerik Alanı */}
-      <div style={{ flex: 1, textAlign: "center", marginTop: "200px" }}>
-        <h2>İletişim Sayfası</h2>
-        <p>Bizimle aşağıdaki seçeneklerden iletişime geçebilirsiniz.</p>
+      <div
+        style={{
+          flex: 1,
+          textAlign: "center",
+          marginTop: "40px",
+          marginBottom: "20px",
+        }}
+      >
+        <Typography.Title level={2}>İletişim Sayfası</Typography.Title>
+        <Typography.Text style={{ fontSize: "16px" }}>
+          Bizimle aşağıdaki seçeneklerden iletişime geçebilirsiniz.
+        </Typography.Text>
 
-        {/* Telefon ile arama butonu */}
-        <Button
-          type="primary"
-          icon={<PhoneOutlined />}
-          size="large"
-          style={{ marginRight: "10px" }}
-          href={`tel:${phoneNumber}`}
-        >
-          Telefon ile Ara
-        </Button>
+        <div style={{ marginTop: "30px" }}>
+          {/* Telefon ile arama butonu */}
+          <Space direction="vertical" size="middle" style={{ width: "100%" }}>
+            <Button
+              type="primary"
+              icon={<PhoneOutlined />}
+              size="large"
+              style={{
+                marginBottom: "20px",
+                width: "100%",
+                maxWidth: "400px", // Büyük ekranlarda buton genişliğini sınırladık
+                borderRadius: "8px",
+                margin: "0 auto", // Ortalamak için
+              }}
+              href={`tel:${phoneNumber}`}
+            >
+              Telefon ile Ara
+            </Button>
 
-        {/* WhatsApp butonu */}
-        <Button
-          type="default"
-          icon={<WhatsAppOutlined />}
-          size="large"
-          href={`https://wa.me/90${phoneNumber}`}
-          target="_blank"
-          style={{ backgroundColor: "#25D366", color: "white" }}
-        >
-          WhatsApp'tan Mesaj Gönder
-        </Button>
+            {/* WhatsApp butonu */}
+            <Button
+              type="default"
+              icon={<WhatsAppOutlined />}
+              size="large"
+              href={`https://wa.me/90${phoneNumber}`}
+              target="_blank"
+              style={{
+                backgroundColor: "#25D366",
+                color: "white",
+                width: "100%",
+                maxWidth: "400px", // Büyük ekranlarda buton genişliğini sınırladık
+                borderRadius: "8px",
+                margin: "0 auto", // Ortalamak için
+              }}
+            >
+              WhatsApp'tan Mesaj Gönder
+            </Button>
+          </Space>
+        </div>
       </div>
 
-      {/* Footer En Alta Sabitlendi */}
+      {/* Footer */}
       <FooterComponent />
     </div>
   );

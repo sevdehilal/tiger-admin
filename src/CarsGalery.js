@@ -26,14 +26,15 @@ import { Helmet } from "react-helmet-async";
   <meta name="robots" content="index, follow" />
 </Helmet>
 
-
 const { Meta } = Card;
 
 const CarGallery = () => {
   const [cars, setCars] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
+  // Fetch car data from firebase
   useEffect(() => {
     const fetchCars = async () => {
       const carsCollection = collection(db, "cars");
@@ -51,6 +52,7 @@ const CarGallery = () => {
     fetchCars();
   }, []);
 
+  // Auto carousel effect
   useEffect(() => {
     if (cars.length === 0) return;
 
@@ -61,6 +63,21 @@ const CarGallery = () => {
     return () => clearInterval(interval);
   }, [cars]);
 
+  // Mobile screen detection
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768); // Check if the screen is mobile size
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize(); // Initial check
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  // Handle next and previous buttons
   const handleNext = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % cars.length);
   };
@@ -77,6 +94,7 @@ const CarGallery = () => {
     <div style={{ padding: "0px" }}>
       <Header />
 
+      {/* Hero Section with Image */}
       <div
         style={{
           display: "flex",
@@ -86,67 +104,65 @@ const CarGallery = () => {
           marginBottom: "20px",
           position: "relative",
           width: "100%",
-          height: "450px", // Arka planın görünmesi için yüksekliği artır
-          backgroundImage: `url("")`, // Buraya arka plan resmi URL'sini ekleyin
-          backgroundSize: "cover", // Resmin tamamı görünsün
-          backgroundPosition: "center", // Resmi ortala
+          height: "450px", 
+          backgroundImage: `url("")`, 
+          backgroundSize: "cover", 
+          backgroundPosition: "center", 
           backgroundRepeat: "no-repeat",
         }}
       >
-      {/* Sol Ok Butonu */}
-      <LeftOutlined
-        onClick={handlePrev}
-        style={{
-          position: "absolute",
-          left: "10%",
-          top: "50%",
-          transform: "translateY(-50%)",
-          fontSize: "30px",
-          color: "white",
-          backgroundColor: "rgba(0,0,0,0.5)",
-          padding: "10px",
-          borderRadius: "50%",
-          cursor: "pointer",
-        }}
-      />
-
-      {/* Resim */}
-      {cars.length > 0 && (
-        <img
-          alt={cars[currentIndex].model}
-          src={cars[currentIndex].imageUrl}
+        {/* Left Arrow Button */}
+        <LeftOutlined
+          onClick={handlePrev}
           style={{
-            height: "400px", // Adjust this based on the desired image height
-            width: "100%", // Ensure the image spans the width of the container
-            objectFit: "contain", // Ensure the image fits within the container
-            borderRadius: "10px",
-            transition: "opacity 1s ease-in-out",
-            opacity: 0.9,
+            position: "absolute",
+            left: "10%",
+            top: "50%",
+            transform: "translateY(-50%)",
+            fontSize: "30px",
+            color: "white",
+            backgroundColor: "rgba(0,0,0,0.5)",
+            padding: "10px",
+            borderRadius: "50%",
+            cursor: "pointer",
           }}
         />
-      )}
 
-      {/* Sağ Ok Butonu */}
-      <RightOutlined
-        onClick={handleNext}
-        style={{
-          position: "absolute",
-          right: "10%",
-          top: "50%",
-          transform: "translateY(-50%)",
-          fontSize: "30px",
-          color: "white",
-          backgroundColor: "rgba(0,0,0,0.5)",
-          padding: "10px",
-          borderRadius: "50%",
-          cursor: "pointer",
-        }}
-      />
-    </div>
+        {/* Image Slider */}
+        {cars.length > 0 && (
+          <img
+            alt={cars[currentIndex].model}
+            src={cars[currentIndex].imageUrl}
+            style={{
+              height: "400px", 
+              width: "100%", 
+              objectFit: "contain", 
+              borderRadius: "10px",
+              transition: "opacity 1s ease-in-out",
+              opacity: 0.9,
+            }}
+          />
+        )}
 
+        {/* Right Arrow Button */}
+        <RightOutlined
+          onClick={handleNext}
+          style={{
+            position: "absolute",
+            right: "10%",
+            top: "50%",
+            transform: "translateY(-50%)",
+            fontSize: "30px",
+            color: "white",
+            backgroundColor: "rgba(0,0,0,0.5)",
+            padding: "10px",
+            borderRadius: "50%",
+            cursor: "pointer",
+          }}
+        />
+      </div>
 
-
-      {/* Slider Altındaki Çizgi ve Başlık */}
+      {/* Line Below Slider */}
       <div
         style={{
           width: "100%",
@@ -159,74 +175,72 @@ const CarGallery = () => {
         Kırklareli Araç Kiralama - Günlük & Aylık Kiralama
       </h1>
 
-      {/* Araba Kartları */}
+      {/* Car Cards Section */}
       <div style={{ display: "flex", justifyContent: "center", padding: "20px 0" }}>
-        <div style={{ maxWidth: "1200px", width: "100%", padding: "0 20px" }}>
-          {/* İçeriğe sağdan ve soldan boşluk */}
+        <div style={{ maxWidth: "1200px", width: "100%", padding: "0 30px" }}>
           <Row gutter={[24, 24]} justify="center">
             {cars.map((car) => (
               <Col xs={24} sm={12} md={8} lg={8} key={car.id}>
-              <Card
-                hoverable
-                style={{ width: "100%", textAlign: "center", position: "relative" }}
-                cover={
-                  <div style={{ position: "relative" }}>
-                    <img
-                      alt={car.model}
-                      src={car.imageUrl}
-                      style={{
-                        height: "180px",
-                        objectFit: "cover",
-                        borderTopLeftRadius: "8px",
-                        borderTopRightRadius: "8px",
-                        width: "100%",
-                      }}
-                    />
-                    {/* Araç Sayısı Etiketi */}
-                    <div
-                      style={{
-                        position: "absolute",
-                        top: "10px",
-                        right: "10px",
-                        backgroundColor: "#FFA500",
-                        color: "white",
-                        padding: "5px 10px",
-                        borderRadius: "20px",
-                        fontWeight: "bold",
-                        fontSize: "14px",
-                        boxShadow: "0px 2px 5px rgba(0,0,0,0.3)",
-                      }}
-                    >
-                      {car.quantity} Adet
+                <Card
+                  hoverable
+                  style={{ width: "100%", textAlign: "center", position: "relative" }}
+                  cover={
+                    <div style={{ position: "relative", padding: isMobile ? "0 20px" : "0" }}>
+                      <img
+                        alt={car.model}
+                        src={car.imageUrl}
+                        style={{
+                          height: "180px",
+                          weight: "%100",
+                          objectFit: "contain", // Bu şekilde resmin boyutunu kartın boyutlarına uyarlıyoruz.
+                          borderTopLeftRadius: "8px",
+                          borderTopRightRadius: "8px",
+                          width: "100%",
+                        }}
+                      />
                     </div>
-                  </div>
-                }
-              >
-            
-            <Meta
-                  title={
-                    <Typography.Title level={3} style={{ marginBottom: "8px" }}>
-                      {car.model}
-                    </Typography.Title>
                   }
+                >
+                  {/* Car Quantity Badge */}
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: "10px",
+                      right: "10px",
+                      backgroundColor: "#FFA500",
+                      color: "white",
+                      padding: "5px 10px",
+                      borderRadius: "20px",
+                      fontWeight: "bold",
+                      fontSize: "14px",
+                      boxShadow: "0px 2px 5px rgba(0,0,0,0.3)",
+                    }}
+                  >
+                    {car.quantity} Adet
+                  </div>
+
+                  <Meta
+                    title={
+                      <Typography.Title level={3} style={{ marginBottom: "8px" }}>
+                        {car.model}
+                      </Typography.Title>
+                    }
                     description={
                       <div>
                         <p>
-                          <CarOutlined style={{ color: '#FFA500' }} /> <strong></strong> {car.fuel}
+                          <CarOutlined style={{ color: '#FFA500' }} /> <strong>{car.fuel}</strong>
                         </p>
                         <p>
-                          <ToolOutlined style={{ color: '#FFA500' }} /> <strong></strong> {car.transmission}
+                          <ToolOutlined style={{ color: '#FFA500' }} /> <strong>{car.transmission}</strong>
                         </p>
                         <p>
-                          <CalendarOutlined style={{ color: '#FFA500' }} /> <strong></strong> {car.year}
+                          <CalendarOutlined style={{ color: '#FFA500' }} /> <strong>{car.year}</strong>
                         </p>
-                        
                       </div>
                     }
                   />
 
-
-                  {/* WhatsApp ve Telefon Butonları */}
+                  {/* WhatsApp and Phone Buttons */}
                   <div style={{ marginTop: "10px" }}>
                     <Button
                       type="primary"
@@ -251,10 +265,10 @@ const CarGallery = () => {
               </Col>
             ))}
           </Row>
-          
         </div>
       </div>
-      <FooterComponent></FooterComponent>
+
+      <FooterComponent />
     </div>
   );
 };

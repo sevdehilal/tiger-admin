@@ -24,7 +24,7 @@ const HeaderComponent = () => {
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        height: isMobile ? '60px' : '100px', // Header boyutunu mobilde küçültüyoruz
+        height: isMobile ? '80px' : '100px', // Header boyutunu mobilde küçültüyoruz
         padding: isMobile ? '0 20px': '0 70px' ,
         backgroundColor: '#2A2A2C',
       }}
@@ -37,7 +37,7 @@ const HeaderComponent = () => {
           style={{ 
             maxWidth: '100%', // Logonun orantılı olarak küçülmesini sağlar
             height: 'auto', // Yükseklik oranını korur
-            width: isMobile ? '60px' : '100px', // Mobilde biraz küçültüyoruz, masaüstünde 160px
+            width: isMobile ? '80px' : '100px', // Mobilde biraz küçültüyoruz, masaüstünde 160px
             marginRight: '10px' 
           }} 
         />

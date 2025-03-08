@@ -37,19 +37,19 @@ const FooterComponent = () => {
           {/* Bilgileri 2 Kolona Bölme */}
           <Row gutter={[16, 16]}>
             <Col xs={24} sm={12}>
-              <p style={{ marginBottom: "8px" }}>
+              <p style={{ marginBottom: "8px", fontSize: "14px" }}>
                 <EnvironmentOutlined style={{ marginRight: "8px" }} />
                 Karakaş mah. Şehit jandarma Yıldırım Akbulut cad. no 27 /b, Kırklareli Merkez
               </p>
             </Col>
             <Col xs={24} sm={12}>
-              <p style={{ marginBottom: "8px" }}>
+              <p style={{ marginBottom: "8px", fontSize: "14px" }}>
                 <PhoneOutlined style={{ marginRight: "8px" }} />
                 0 552 252 39 97
               </p>
             </Col>
             <Col xs={24} sm={12}>
-              <p style={{ marginBottom: "8px" }}>
+              <p style={{ marginBottom: "8px", fontSize: "14px" }}>
                 <InfoCircleOutlined style={{ marginRight: "8px" }} />
                 <a href="/gizlilik-politikasi" style={{ color: "#fff", textDecoration: "underline" }}>
                   Gizlilik Politikası
@@ -65,6 +65,27 @@ const FooterComponent = () => {
           </p>
         </Col>
       </Row>
+
+      {/* Mobil uyumlu stil için medya sorgusu */}
+      <style jsx global>{`
+        @media (max-width: 767px) {
+          footer {
+            padding: 10px 20px; /* Mobilde daha küçük padding */
+          }
+
+          footer h3 {
+            font-size: 8px; /* Mobilde başlık fontunu küçültüyoruz */
+          }
+
+          footer p {
+            font-size: 8px; /* Mobilde paragrafları daha küçük yapıyoruz */
+          }
+
+          footer a {
+            font-size: 12px; /* Linklerin fontunu küçültüyoruz */
+          }
+        }
+      `}</style>
     </Footer>
   );
 };
