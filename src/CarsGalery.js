@@ -184,7 +184,7 @@ const CarGallery = () => {
                 <Card
                   hoverable
                   style={{
-                    width: "100%",
+                    width: isMobile ? "500px" : "400px",
                     textAlign: "center",
                     position: "relative",
                   }}
@@ -193,8 +193,8 @@ const CarGallery = () => {
                       style={{
                         position: "relative",
                         overflow: "hidden", // Taşmaların engellenmesi için
-                        height: isMobile ? "200px" : "150px",
-                        width: "100%",// Mobilde boyutu küçült
+                        height: isMobile ? "200px" : "400px",
+                        width:  "%100"// Mobilde boyutu küçült
                       }}
                     >
                       <img
