@@ -41,7 +41,7 @@ const Contact = () => {
               size="large"
               style={{
                 marginBottom: "20px",
-                width: "100%",
+                width: "50%",
                 maxWidth: "400px", // Büyük ekranlarda buton genişliğini sınırladık
                 borderRadius: "8px",
                 margin: "0 auto", // Ortalamak için
@@ -61,13 +61,13 @@ const Contact = () => {
               style={{
                 backgroundColor: "#25D366",
                 color: "white",
-                width: "100%",
+                width: "50%",
                 maxWidth: "400px", // Büyük ekranlarda buton genişliğini sınırladık
                 borderRadius: "8px",
                 margin: "0 auto", // Ortalamak için
               }}
             >
-              WhatsApp'tan Mesaj Gönder
+              WhatsApp
             </Button>
           </Space>
         </div>

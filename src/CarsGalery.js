@@ -184,7 +184,7 @@ const CarGallery = () => {
                 <Card
                   hoverable
                   style={{
-                    width: isMobile ? "500px" : "400px",
+                    width: "100%",
                     textAlign: "center",
                     position: "relative",
                   }}
@@ -193,17 +193,18 @@ const CarGallery = () => {
                       style={{
                         position: "relative",
                         overflow: "hidden", // Taşmaların engellenmesi için
-                        height: isMobile ? "200px" : "400px",
-                        width:  "%100"// Mobilde boyutu küçült
+                        height: isMobile ? "200px" : "250px", // Mobilde daha küçük yükseklik, masaüstünde büyük
+                        width: "100%", // Genişlik 100% olmalı, sabit değil
                       }}
                     >
                       <img
                         alt={car.model}
                         src={car.imageUrl}
                         style={{
-                          width: "100%", // Resmi kartın genişliğine göre ayarla
-                          height: "100%", // Yüksekliği de 100% yaparak resmin kartın yüksekliğine uyum sağlamasını sağla
-                          objectFit: "cover", // Resmin taşmasını engellemek ve kesilmesini sağlamak için
+                          width: "100%", // Genişlik her zaman %100 olacak şekilde ayarlanır
+                          height: "100%", // Yükseklik de %100 yapılır
+                          objectFit: "contain", // Resmin tamamını görünür kıl, taşma olmasın
+                          objectPosition: "center", // Resmi ortalar
                         }}
                       />
                     </div>
