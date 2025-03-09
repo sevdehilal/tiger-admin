@@ -119,7 +119,7 @@ const CarGallery = () => {
     width: isMobile ? '100%' : '40%', // Mobilde %100 genişlik, normalde %40
     color: 'black',
     padding: '20px',
-    backgroundColor: 'rgb(255, 253, 253)',
+    
     borderRadius: '10px',
   }}
 >
