@@ -113,24 +113,25 @@ const CarGallery = () => {
       }}
     >
       {/* Sol Taraf: Yazılar */}
-      <div
-        className="slider-text"
-        style={{
-          width: isMobile ? '100%' : '40%', // Mobilde %100 genişlik, normalde %40
-          color: 'white',
-          padding: '20px',
-          backgroundColor: 'rgba(0,0,0,0.5)',
-          borderRadius: '10px',
-        }}
-      >
-        <h2 style={{ fontSize: isMobile ? '20px' : '30px', marginBottom: '20px' }}>Kırklareli Araç Kiralama</h2>
-        <ul style={{ listStyleType: 'none', padding: 0, fontSize: isMobile ? '13px' : '20px' }}>
-          <li>✔ Bakımlı Araçlar</li>
-          <li>✔ Uygun Fiyat</li>
-          <li>✔ Güvenilir Hizmet</li>
-          <li>✔ Acil Durumlar İçin Hızlı Hizmet</li>
-        </ul>
-      </div>
+<div
+  className="slider-text"
+  style={{
+    width: isMobile ? '100%' : '40%', // Mobilde %100 genişlik, normalde %40
+    color: 'black',
+    padding: '20px',
+    backgroundColor: 'rgb(255, 253, 253)',
+    borderRadius: '10px',
+  }}
+>
+  <h2 style={{ fontSize: isMobile ? '20px' : '30px', marginBottom: '20px' }}>Kırklareli Araç Kiralama</h2>
+  <ul style={{ listStyleType: 'none', padding: 10, fontSize: isMobile ? '13px' : '20px', marginBottom: '10px' }}>
+    <li style={{ marginBottom: isMobile ? '8px' : '15px' }}>✔ Bakımlı Araçlar</li>
+    <li style={{ marginBottom: isMobile ? '8px' : '15px' }}>✔ Uygun Fiyat</li>
+    <li style={{ marginBottom: isMobile ? '8px' : '15px' }}>✔ Güvenilir Hizmet</li>
+    <li style={{ marginBottom: isMobile ? '8px' : '15px' }}>✔ Acil Durumlar İçin Hızlı Hizmet</li>
+  </ul>
+</div>
+
 
       {/* Sağ Taraf: Slider ve Butonlar */}
       <div
@@ -153,7 +154,7 @@ const CarGallery = () => {
             borderRadius: '50%',
             cursor: 'pointer',
             marginRight: isMobile ? '0px' : '0px', 
-            marginLeft: isMobile ? '0px' : '20px',// Mobilde sağa margin ekleme
+            marginLeft: isMobile ? '0px' : '0px',// Mobilde sağa margin ekleme
           }}
         />
 
@@ -164,9 +165,9 @@ const CarGallery = () => {
             src={cars[currentIndex].imageUrl}
             className="slider-image"
             style={{
-              height: isMobile ? '180px' : '270px', // Mobilde daha küçük resim
+              height: isMobile ? '200px' : '300px', // Mobilde daha küçük resim
               width: isMobile ? '80%' : '80%', // Mobilde resim daha küçük
-              objectFit: 'cover',
+              objectFit: 'contain',
               borderRadius: '10px',
               transition: 'opacity 1s ease-in-out',
               opacity: 0.9,
