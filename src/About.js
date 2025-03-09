@@ -1,16 +1,16 @@
 import React from 'react';
 import { Helmet } from "react-helmet-async";
-import { Typography, Layout, Space } from 'antd';
+import { Typography, Layout, Space, Card } from 'antd';
 import Header from "./components/Header";
 import FooterComponent from './components/FooterComponent';
+import "./styles/aboutStyles.css";
 
 const { Title, Paragraph } = Typography;
 const { Content } = Layout;
 
 const About = () => {
   return (
-    <Layout style={{ backgroundColor: '#fff', padding: '0px' }}>
-      {/* SEO için meta etiketleri */}
+    <Layout className="about-layout">
       <Header />
       <Helmet>
         <title>Tiger Rent A Car | Hakkımızda</title>
@@ -22,46 +22,48 @@ const About = () => {
         <meta name="author" content="Tiger Rent A Car" />
       </Helmet>
 
-      <Content style={{ maxWidth: '800px', margin: 'auto' }}>
-        <Title level={1}>Tiger Rent A Car | Hakkımızda</Title>
-        <Paragraph>
-          Tiger Rent A Car olarak, siz değerli müşterilerimize en kaliteli ve güvenilir araç kiralama hizmetini sunmak için buradayız. 
-          Yılların verdiği deneyim ve müşteri memnuniyeti odaklı hizmet anlayışımızla, seyahatlerinizi konforlu, güvenli ve keyifli hale getirmeyi amaçlıyoruz.
-        </Paragraph>
+      <Content className="about-content">
+        <Card className="about-card">
+          <Title level={2} className="about-title">Tiger Rent A Car | Hakkımızda</Title>
+          <Paragraph className="about-paragraph">
+            Tiger Rent A Car olarak, siz değerli müşterilerimize en kaliteli ve güvenilir araç kiralama hizmetini sunmak için buradayız. 
+            Yılların verdiği deneyim ve müşteri memnuniyeti odaklı hizmet anlayışımızla, seyahatlerinizi konforlu, güvenli ve keyifli hale getirmeyi amaçlıyoruz.
+          </Paragraph>
+        </Card>
 
-        <Space direction="vertical" size="large">
-          <div>
-            <Title level={2}>Müşteri Memnuniyeti Önceliğimiz</Title>
-            <Paragraph>
+        <Space direction="vertical" size="large" className="about-sections">
+          <Card className="about-card">
+            <Title level={3} className="about-subtitle">Müşteri Memnuniyeti Önceliğimiz</Title>
+            <Paragraph className="about-paragraph">
               Her aracımız düzenli bakım ve kontrollerden geçirilerek, güvenliğiniz ve rahatınız düşünülerek sizlere teslim edilmektedir. 
               Kiralama sürecinizin her aşamasında, hızlı ve sorunsuz bir hizmet sunmaya özen gösteriyoruz.
             </Paragraph>
-          </div>
+          </Card>
 
-          <div>
-            <Title level={2}>Şeffaf ve Güvenilir Hizmet</Title>
-            <Paragraph>
+          <Card className="about-card">
+            <Title level={3} className="about-subtitle">Şeffaf ve Güvenilir Hizmet</Title>
+            <Paragraph className="about-paragraph">
               Şeffaf fiyat politikamız sayesinde sürpriz veya gizli ücretlendirmelere yer vermiyoruz. Amacımız, her bütçeye uygun kaliteli araçları, 
               kolay ve hızlı bir şekilde müşterilerimize sunarak, sorunsuz bir araç kiralama deneyimi yaşatmak.
             </Paragraph>
-          </div>
+          </Card>
 
-          <div>
-            <Title level={2}>Esnek Kiralama Seçenekleri</Title>
-            <Paragraph>
+          <Card className="about-card">
+            <Title level={3} className="about-subtitle">Esnek Kiralama Seçenekleri</Title>
+            <Paragraph className="about-paragraph">
               İster kısa süreli ister uzun süreli kiralama taleplerinizde, iş seyahatlerinizde, tatillerinizde veya özel günlerinizde en iyi seçenekleri sunmaktan mutluluk duyarız.
             </Paragraph>
-          </div>
+          </Card>
 
-          <div>
-            <Title level={2}>Bize Ulaşın</Title>
-            <Paragraph>
+          <Card className="about-card">
+            <Title level={3} className="about-subtitle">Bize Ulaşın</Title>
+            <Paragraph className="about-paragraph">
               Kaliteli, güvenilir ve müşteri dostu bir araç kiralama deneyimi için bizimle hemen iletişime geçebilirsiniz. Tiger Rent A Car olarak, yolda daima yanınızdayız!
             </Paragraph>
-          </div>
+          </Card>
         </Space>
       </Content>
-      <FooterComponent></FooterComponent>
+      <FooterComponent />
     </Layout>
   );
 };

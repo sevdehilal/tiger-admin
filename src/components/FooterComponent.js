@@ -1,4 +1,5 @@
-import React from "react";
+
+import React, { useState, useEffect } from 'react';
 import { Layout, Row, Col } from "antd";
 import { PhoneOutlined, EnvironmentOutlined, InfoCircleOutlined } from "@ant-design/icons";
 import logo from "../img/logo.png"; // Logonun dosya yolunu ayarla
@@ -6,6 +7,17 @@ import logo from "../img/logo.png"; // Logonun dosya yolunu ayarla
 const { Footer } = Layout;
 
 const FooterComponent = () => {
+    const [visible, setVisible] = useState(false);
+      const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+    
+      useEffect(() => {
+        const handleResize = () => {
+          setIsMobile(window.innerWidth < 768);
+        };
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+      }, []);
+
   return (
     <Footer
       style={{
@@ -24,13 +36,13 @@ const FooterComponent = () => {
           <img 
             src={logo} 
             alt="Logo" 
-            style={{ width: "180px", height: "auto" }} 
+            style={{ width: isMobile ? '80px' : '180px', height: "auto" }} 
           />
         </Col>
 
         {/* Sağ Taraf - Bilgiler */}
         <Col xs={24} sm={16} md={18} lg={18}>
-          <h3 style={{ color: "#fff", fontSize: "16px", marginBottom: "10px" }}>
+          <h3 style={{ color: "#fff", fontSize: isMobile ? '18px' : '100px', marginBottom: "10px" }}>
             TİGER ARAÇ KİRALAMA HİZMETLERİ LİMİTED ŞİRKETİ
           </h3>
 
@@ -66,26 +78,7 @@ const FooterComponent = () => {
         </Col>
       </Row>
 
-      {/* Mobil uyumlu stil için medya sorgusu */}
-      <style jsx global>{`
-        @media (max-width: 767px) {
-          footer {
-            padding: 10px 20px; /* Mobilde daha küçük padding */
-          }
-
-          footer h3 {
-            font-size: 8px; /* Mobilde başlık fontunu küçültüyoruz */
-          }
-
-          footer p {
-            font-size: 8px; /* Mobilde paragrafları daha küçük yapıyoruz */
-          }
-
-          footer a {
-            font-size: 12px; /* Linklerin fontunu küçültüyoruz */
-          }
-        }
-      `}</style>
+      
     </Footer>
   );
 };

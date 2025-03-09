@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { db, collection, getDocs } from "./firebase";
 import { Row, Col, Card, Skeleton, Typography, Button } from "antd";
+import background from "./img/carback.png.jpeg";
 import FooterComponent from "./components/FooterComponent";
 import {
   PhoneOutlined,
@@ -94,85 +95,78 @@ const CarGallery = () => {
     <div style={{ padding: "0px" }}>
       <Header />
 
-      {/* Hero Section with Image */}
       <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          flexDirection: "column",
-          marginBottom: "20px",
-          position: "relative",
-          width: "100%",
-          height: "450px", 
-          backgroundImage: `url("")`, 
-          backgroundSize: "cover", 
-          backgroundPosition: "center", 
-          backgroundRepeat: "no-repeat",
-        }}
-      >
-        {/* Left Arrow Button */}
-        <LeftOutlined
-          onClick={handlePrev}
-          style={{
-            position: "absolute",
-            left: "10%",
-            top: "50%",
-            transform: "translateY(-50%)",
-            fontSize: "30px",
-            color: "white",
-            backgroundColor: "rgba(0,0,0,0.5)",
-            padding: "10px",
-            borderRadius: "50%",
-            cursor: "pointer",
-          }}
-        />
+  style={{
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column",
+    marginBottom: "20px",
+    position: "relative",
+    width: "100%",
+    height: "450px",
+    backgroundImage: `url(${background})`,
 
-        {/* Image Slider */}
-        {cars.length > 0 && (
-          <img
-            alt={cars[currentIndex].model}
-            src={cars[currentIndex].imageUrl}
-            style={{
-              height: "400px", 
-              width: "100%", 
-              objectFit: "contain", 
-              borderRadius: "10px",
-              transition: "opacity 1s ease-in-out",
-              opacity: 0.9,
-            }}
-          />
-        )}
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+  }}
+>
+  
 
-        {/* Right Arrow Button */}
-        <RightOutlined
-          onClick={handleNext}
-          style={{
-            position: "absolute",
-            right: "10%",
-            top: "50%",
-            transform: "translateY(-50%)",
-            fontSize: "30px",
-            color: "white",
-            backgroundColor: "rgba(0,0,0,0.5)",
-            padding: "10px",
-            borderRadius: "50%",
-            cursor: "pointer",
-          }}
-        />
-      </div>
+  {/* Sol Ok Tuşu */}
+  <LeftOutlined
+    onClick={handlePrev}
+    style={{
+      position: "absolute",
+      left: "10%",
+      top: "50%",
+      transform: "translateY(-50%)",
+      fontSize: "30px",
+      color: "white",
+      backgroundColor: "rgba(0,0,0,0.5)",
+      padding: "10px",
+      borderRadius: "50%",
+      cursor: "pointer",
+    }}
+  />
 
-      {/* Line Below Slider */}
-      <div
-        style={{
-          width: "100%",
-          height: "2px",
-          backgroundColor: "#d3d3d3",
-          marginBottom: "20px",
-        }}
-      ></div>
+  {/* Slider Resmi */}
+  {cars.length > 0 && (
+    <img
+      alt={cars[currentIndex].model}
+      src={cars[currentIndex].imageUrl}
+      style={{
+        height: "400px",
+        width: "100%",
+        objectFit: "contain",
+        borderRadius: "10px",
+        transition: "opacity 1s ease-in-out",
+        opacity: 0.9,
+      }}
+    />
+  )}
+
+  {/* Sağ Ok Tuşu */}
+  <RightOutlined
+    onClick={handleNext}
+    style={{
+      position: "absolute",
+      right: "10%",
+      top: "50%",
+      transform: "translateY(-50%)",
+      fontSize: "30px",
+      color: "white",
+      backgroundColor: "rgba(0,0,0,0.5)",
+      padding: "10px",
+      borderRadius: "50%",
+      cursor: "pointer",
+    }}
+  />
+</div>
+      
       <h1 style={{ textAlign: "center", fontSize: "32px" }}>
-        Kırklareli Araç Kiralama - Günlük & Aylık Kiralama
+        Kırklareli Araç Kiralama 
       </h1>
 
       {/* Car Cards Section */}
