@@ -96,75 +96,100 @@ const CarGallery = () => {
       <Header />
 
       <div
-  style={{
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    flexDirection: "column",
-    marginBottom: "20px",
-    position: "relative",
-    width: "100%",
-    height: "450px",
-    backgroundImage: `url(${background})`,
-
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    backgroundRepeat: "no-repeat",
-  }}
->
-  
-
-  {/* Sol Ok Tuşu */}
-  <LeftOutlined
-    onClick={handlePrev}
-    style={{
-      position: "absolute",
-      left: "10%",
-      top: "50%",
-      transform: "translateY(-50%)",
-      fontSize: "30px",
-      color: "white",
-      backgroundColor: "rgba(0,0,0,0.5)",
-      padding: "10px",
-      borderRadius: "50%",
-      cursor: "pointer",
-    }}
-  />
-
-  {/* Slider Resmi */}
-  {cars.length > 0 && (
-    <img
-      alt={cars[currentIndex].model}
-      src={cars[currentIndex].imageUrl}
       style={{
-        height: "400px",
-        width: "100%",
-        objectFit: "contain",
-        borderRadius: "10px",
-        transition: "opacity 1s ease-in-out",
-        opacity: 0.9,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        position: 'relative',
+        width: '100%',
+        height: '400px',
+        backgroundImage: `url(${background})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        padding: '20px',
+        flexDirection: isMobile ? 'column' : 'row', // isMobile durumu ile yönü belirle
+        flexWrap: 'nowrap',
       }}
-    />
-  )}
+    >
+      {/* Sol Taraf: Yazılar */}
+      <div
+        className="slider-text"
+        style={{
+          width: isMobile ? '100%' : '40%', // Mobilde %100 genişlik, normalde %40
+          color: 'white',
+          padding: '20px',
+          backgroundColor: 'rgba(0,0,0,0.5)',
+          borderRadius: '10px',
+        }}
+      >
+        <h2 style={{ fontSize: isMobile ? '20px' : '30px', marginBottom: '20px' }}>Kırklareli Araç Kiralama</h2>
+        <ul style={{ listStyleType: 'none', padding: 0, fontSize: isMobile ? '13px' : '20px' }}>
+          <li>✔ Bakımlı Araçlar</li>
+          <li>✔ Uygun Fiyat</li>
+          <li>✔ Güvenilir Hizmet</li>
+          <li>✔ Acil Durumlar İçin Hızlı Hizmet</li>
+        </ul>
+      </div>
 
-  {/* Sağ Ok Tuşu */}
-  <RightOutlined
-    onClick={handleNext}
-    style={{
-      position: "absolute",
-      right: "10%",
-      top: "50%",
-      transform: "translateY(-50%)",
-      fontSize: "30px",
-      color: "white",
-      backgroundColor: "rgba(0,0,0,0.5)",
-      padding: "10px",
-      borderRadius: "50%",
-      cursor: "pointer",
-    }}
-  />
-</div>
-      
+      {/* Sağ Taraf: Slider ve Butonlar */}
+      <div
+        className="slider-content"
+        style={{
+          width: isMobile ? '100%' : '60%', // Mobilde %100 genişlik, normalde %60
+          display: 'flex',
+          alignItems: 'center',
+          position: 'relative',
+        }}
+      >
+        {/* Sol Ok Tuşu */}
+        <LeftOutlined
+          onClick={handlePrev}
+          style={{
+            fontSize: '10px',
+            color: 'white',
+            backgroundColor: 'rgba(0,0,0,0.5)',
+            padding: '10px',
+            borderRadius: '50%',
+            cursor: 'pointer',
+            marginRight: isMobile ? '0px' : '0px', 
+            marginLeft: isMobile ? '0px' : '20px',// Mobilde sağa margin ekleme
+          }}
+        />
+
+        {/* Slider Resmi */}
+        {cars.length > 0 && (
+          <img
+            alt={cars[currentIndex].model}
+            src={cars[currentIndex].imageUrl}
+            className="slider-image"
+            style={{
+              height: isMobile ? '180px' : '270px', // Mobilde daha küçük resim
+              width: isMobile ? '80%' : '80%', // Mobilde resim daha küçük
+              objectFit: 'cover',
+              borderRadius: '10px',
+              transition: 'opacity 1s ease-in-out',
+              opacity: 0.9,
+            }}
+          />
+        )}
+
+        {/* Sağ Ok Tuşu */}
+        <RightOutlined
+          onClick={handleNext}
+          style={{
+            fontSize: '10px',
+            color: 'white',
+            backgroundColor: 'rgba(0,0,0,0.5)',
+            padding: '10px',
+            borderRadius: '50%',
+            cursor: 'pointer',
+            marginLeft: isMobile ? '0' : '0px', // Mobilde sağa margin ekleme
+          }}
+        />
+      </div>
+    </div>
+
       <h1 style={{ textAlign: "center", fontSize: "32px" }}>
         Kırklareli Araç Kiralama 
       </h1>
@@ -187,7 +212,7 @@ const CarGallery = () => {
                       style={{
                         position: "relative",
                         overflow: "hidden", // Taşmaların engellenmesi için
-                        height: isMobile ? "200px" : "250px", // Mobilde daha küçük yükseklik, masaüstünde büyük
+                        height: isMobile ? "180px" : "250px", // Mobilde daha küçük yükseklik, masaüstünde büyük
                         width: "100%", // Genişlik 100% olmalı, sabit değil
                       }}
                     >
@@ -204,23 +229,7 @@ const CarGallery = () => {
                     </div>
                   }
                 >
-                  {/* Car Quantity Badge */}
-                  <div
-                    style={{
-                      position: "absolute",
-                      top: "10px",
-                      right: "10px",
-                      backgroundColor: "#FFA500",
-                      color: "white",
-                      padding: "5px 10px",
-                      borderRadius: "20px",
-                      fontWeight: "bold",
-                      fontSize: "14px",
-                      boxShadow: "0px 2px 5px rgba(0,0,0,0.3)",
-                    }}
-                  >
-                    {car.quantity} Adet
-                  </div>
+                  
 
                   <Meta
                     title={
