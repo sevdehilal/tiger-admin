@@ -42,7 +42,7 @@ const FooterComponent = () => {
 
         {/* Sağ Taraf - Bilgiler */}
         <Col xs={24} sm={16} md={18} lg={18}>
-          <h3 style={{ color: "#fff", fontSize: isMobile ? '18px' : '100px', marginBottom: "10px" }}>
+          <h3 style={{ color: "#fff", fontSize: isMobile ? '18px' : '24px', marginBottom: "10px" }}>
             TİGER ARAÇ KİRALAMA HİZMETLERİ LİMİTED ŞİRKETİ
           </h3>
 
