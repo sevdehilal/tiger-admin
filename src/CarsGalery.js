@@ -192,7 +192,7 @@ const CarGallery = () => {
     </div>
 
       <h1 style={{ textAlign: "center", fontSize: "32px" }}>
-        Kırklareli Araç Kiralama 
+      Hızlı, Güvenli, Konforlu Araç Kiralama'nın Adresi
       </h1>
 
       {/* Car Cards Section */}
